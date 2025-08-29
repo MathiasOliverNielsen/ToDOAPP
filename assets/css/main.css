@@ -1,4 +1,10 @@
+/* Imported external css files */
 @import url(reset.css);
+@import url(header.css);
+@import url(footer.css);
+/* Fonts */
+/* h1 font */
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap");
 
 :root {
   --primary-light: #4395a8;
@@ -14,7 +20,7 @@
 /* #region Global Styles */
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: ;
+  background-color: var(--primary-light);
   color: black;
 }
 

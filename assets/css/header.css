@@ -1,0 +1,25 @@
+#mainHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  margin-top: 2rem;
+}
+#mainHeader h1 {
+  font-family: "Black Ops One", cursive, Arial, Helvetica, sans-serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  padding: 1rem 0;
+}
+
+#mainHeader figure img {
+  width: 100px;
+  height: auto;
+}
