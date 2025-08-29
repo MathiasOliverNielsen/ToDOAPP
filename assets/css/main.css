@@ -1,21 +1,20 @@
 @import url(reset.css);
+
 :root {
-  --primary-color: #333;
-  --secondary-color: #f4f4f4;
-  --background-color: #d3d3d3;
-  --border-color: #ccc;
-  --hover-color: #444;
-  --active-color: #222;
-  --focus-color: #444;
-  --button-color: #4caf50;
-  --button-hover-color: #45a049;
-  --valid-color: green;
-  --invalid-color: red;
+  --primary-light: #4395a8;
+  --secondary-light: #f4f4f4;
+  --text-light: #071112;
+  --accent-light: #e7b550;
+  /* Toggle darkMode colors */
+  --primary-dark: #275c7e;
+  --secondary-dark: #ae7719;
+  --text-dark: #edf7f8;
+  --accent-dark: #846433;
 }
 /* #region Global Styles */
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: var(--secondary-color);
+  background-color: ;
   color: black;
 }
 
