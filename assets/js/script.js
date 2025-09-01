@@ -11,9 +11,8 @@ function userStartApp() {
   if (savedData) {
     userData = JSON.parse(savedData);
   }
-  // Initialiser brugerens lister og tema
-  initUserLists(userData.lists);
-  setUserTheme(userData.theme);
+  // Brug controller-laget til at initialisere appen
+  appController(userData);
 }
 // Kald userStartApp når siden er klar
 document.addEventListener('DOMContentLoaded', userStartApp);
