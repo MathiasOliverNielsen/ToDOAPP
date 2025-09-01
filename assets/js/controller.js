@@ -1,5 +1,5 @@
 // Controller-lag for ToDOAPP
-// Her håndteres logik mellem model og view
+// Her håndteres logik mellem model og view, ænder data
 
 function appController(userData) {
   // Tjek om der er eksisterende lister

@@ -14,5 +14,3 @@ function userStartApp() {
   // Brug controller-laget til at initialisere appen
   appController(userData);
 }
-// Kald userStartApp når siden er klar
-document.addEventListener('DOMContentLoaded', userStartApp);
