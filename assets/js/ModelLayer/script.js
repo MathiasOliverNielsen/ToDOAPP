@@ -1,3 +1,7 @@
+import { appController } from '../ControllerLayer/controller.js';
+// Kald userStartApp når siden er klar
+document.addEventListener('DOMContentLoaded', userStartApp);
+
 // Funktion der kaldes ved opstart af Appen
 function userStartApp() {
   const appName = 'ToDoApp';
