@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="assets/css/main.css" />
-    <script src="assets/js/script.js" defer></script>
+    <script type="module" src="assets/js/ModelLayer/script.js"></script>
   </head>
   <body>
     <header id="mainHeader">
       <h1>To DO List</h1>
       <figure><img src="assets/img/crescent-moon-svgrepo-com.svg" alt="Dark/light mode toggle img" /></figure>
     </header>
-    <main id="appInfo"></main>
+    <main id="appInfo">
+      <div id="listsContainer"></div>
+    </main>
     <footer id="mainFooter">
       <button id="addNewList">+</button>
     </footer>

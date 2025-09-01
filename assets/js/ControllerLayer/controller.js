@@ -1,13 +1,10 @@
-// Controller-lag for ToDOAPP
-// Her håndteres logik mellem model og view, ænder data
+import * as model from '../ModelLayer/model.js';
+import { renderLists } from '../UILayer/view.js';
 
-function appController(userData) {
-  // Tjek om der er eksisterende lister
-  if (userData.lists && userData.lists.length > 0) {
-    showLists(userData.lists);
-  } else {
-    addFirstList();
+export function appController() {
+  // If there are no lists, add a default list and update the DOM
+  if (model.userData.lists.length === 0) {
+    model.addFirstList();
   }
-  // Sæt tema uanset
-  setUserTheme(userData.theme);
+  renderLists(model.userData.lists);
 }
