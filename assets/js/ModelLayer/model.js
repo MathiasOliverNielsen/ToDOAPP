@@ -1,3 +1,8 @@
+// dynamisk dataobject der holder styr på alle lister og tema
+export let userData = {
+  lists: [],
+  theme: 'light',
+};
 // Tilføjer en ny liste med et givet navn
 export function addNewList(name) {
   userData.lists.push({ name, items: [] });
@@ -24,10 +29,6 @@ export function deleteListByName(name) {
 export function saveLocalData(appName = 'ToDoApp') {
   localStorage.setItem(appName, JSON.stringify(userData));
 }
-export let userData = {
-  lists: [],
-  theme: 'light',
-};
 export function addFirstList() {
   userData.lists.push({ name: 'Min første liste', items: [] });
   saveLocalData();
