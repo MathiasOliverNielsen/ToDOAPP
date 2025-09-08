@@ -1,3 +1,25 @@
+// Tilføjer en ny liste med et givet navn
+export function addNewList(name) {
+  userData.lists.push({ name, items: [] });
+  saveLocalData();
+}
+
+// Opdaterer navnet på en liste ud fra dens indeks
+export function updateListName(index, newName) {
+  if (userData.lists[index]) {
+    userData.lists[index].name = newName;
+    saveLocalData();
+  }
+}
+
+// Sletter en liste ud fra dens navn (sletter første match)
+export function deleteListByName(name) {
+  const idx = userData.lists.findIndex((list) => list.name === name);
+  if (idx !== -1) {
+    userData.lists.splice(idx, 1);
+    saveLocalData();
+  }
+}
 // Gemmer alle lister til localStorage
 export function saveLocalData(appName = 'ToDoApp') {
   localStorage.setItem(appName, JSON.stringify(userData));
