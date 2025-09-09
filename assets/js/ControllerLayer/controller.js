@@ -26,6 +26,9 @@ export function handleListAction(action, arg1, arg2) {
     case 'addFirst':
       model.addFirstList();
       break;
+    case 'theme':
+      setTheme(arg1); // arg1 should be 'light' or 'dark'
+      break;
     default:
       console.warn('Ukendt handling:', action);
   }
