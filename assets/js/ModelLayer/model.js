@@ -46,3 +46,12 @@ export function loadLocalData(appName = 'ToDoApp') {
     userData.theme = 'light';
   }
 }
+export function saveTheme(theme) {
+  userData.theme = theme;
+  localStorage.setItem('ToDoAppTheme', theme);
+}
+
+export function loadTheme() {
+  const saved = localStorage.getItem('ToDoAppTheme');
+  return saved ? saved : 'light';
+}

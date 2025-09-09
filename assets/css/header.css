@@ -1,3 +1,19 @@
+body.light-mode {
+  background: #fff;
+  color: #222;
+}
+
+body.dark-mode {
+  background: #222;
+  color: #fff;
+}
+
+/* Optional: style the toggle icon */
+.theme-toggle {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+}
 #mainHeader {
   display: flex;
   align-items: center;
@@ -19,7 +35,7 @@
   padding: 1rem 0;
 }
 
-#mainHeader figure img {
+#mainHeader img {
   width: 100px;
   height: auto;
 }

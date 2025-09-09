@@ -2,6 +2,7 @@
 // Håndterer DOM-events og UI
 
 import { appController, handleListAction } from '../ControllerLayer/controller.js';
+import * as model from '../ModelLayer/model.js';
 
 document.addEventListener('DOMContentLoaded', appController); // Kald controlleren når siden er klar
 
@@ -131,3 +132,32 @@ export function renderLists(lists) {
     container.appendChild(listElem);
   });
 }
+
+// Theme toggling
+const moonIcon = document.getElementById('moonIcon');
+const sunIcon = document.getElementById('sunIcon');
+
+export function setTheme(theme) {
+  if (theme === 'dark') {
+    document.body.classList.add('dark-mode');
+    document.body.classList.remove('light-mode');
+    moonIcon.style.display = 'none';
+    sunIcon.style.display = '';
+  } else {
+    document.body.classList.add('light-mode');
+    document.body.classList.remove('dark-mode');
+    moonIcon.style.display = '';
+    sunIcon.style.display = 'none';
+  }
+  model.saveTheme(theme);
+}
+
+// On page load, set theme from localStorage
+document.addEventListener('DOMContentLoaded', () => {
+  const theme = model.loadTheme();
+  setTheme(theme);
+});
+
+// Toggle handlers
+moonIcon.addEventListener('click', () => setTheme('dark'));
+sunIcon.addEventListener('click', () => setTheme('light'));
