@@ -3,6 +3,47 @@ export let userData = {
   lists: [],
   theme: 'light',
 };
+// Tilføjer et item til en liste
+export function addListItem(listName, itemText) {
+  const list = userData.lists.find((l) => l.name === listName);
+  if (!list.items) list.items = [];
+  list.items.push({
+    id: Date.now().toString(),
+    text: itemText,
+    done: false,
+  });
+  saveLocalData();
+}
+
+// Opdaterer et item
+export function updateListItem(listName, itemId, newText) {
+  const list = userData.lists.find((l) => l.name === listName);
+  if (!list) return;
+  const item = list.items.find((i) => i.id === itemId);
+  if (item) {
+    item.text = newText;
+    saveLocalData();
+  }
+}
+
+// Sletter et item
+export function deleteListItem(listName, itemId) {
+  const list = userData.lists.find((l) => l.name === listName);
+  if (!list) return;
+  list.items = list.items.filter((i) => i.id !== itemId);
+  saveLocalData();
+}
+
+// Toggler done-status på et item
+export function toggleListItemDone(listName, itemId) {
+  const list = userData.lists.find((l) => l.name === listName);
+  if (!list) return;
+  const item = list.items.find((i) => i.id === itemId);
+  if (item) {
+    item.done = !item.done;
+    saveLocalData();
+  }
+}
 // Tilføjer en ny liste med et givet navn
 export function addNewList(name) {
   userData.lists.push({ name, items: [] });
