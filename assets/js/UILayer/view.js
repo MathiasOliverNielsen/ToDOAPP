@@ -71,7 +71,7 @@ export function renderLists(lists) {
     const listElem = document.createElement('div');
     listElem.style.display = 'flex';
     listElem.style.alignItems = 'center';
-    listElem.style.gap = '0.5rem';
+    listElem.style.gap = '0.2rem';
 
     // Tjek om denne liste er i redigeringsmode
     if (list.beingEdited) {
@@ -131,12 +131,6 @@ export function renderLists(lists) {
       nameLabel.style.userSelect = 'none';
       nameLabel.style.display = 'inline-block';
       nameLabel.style.color = 'inherit';
-      nameLabel.addEventListener('mouseenter', () => {
-        nameLabel.style.background = '#f0f0f0';
-      });
-      nameLabel.addEventListener('mouseleave', () => {
-        nameLabel.style.background = 'none';
-      });
       nameLabel.addEventListener('click', () => {
         window.location.href = `listitems.html?list=${encodeURIComponent(list.name)}`;
       });
@@ -197,6 +191,8 @@ export function setTheme(theme) {
 document.addEventListener('DOMContentLoaded', () => {
   const theme = model.loadTheme();
   setTheme(theme);
+  const inp = document.getElementById('addItemInput');
+  if (inp) inp.style.background = ''; // ensure CSS applies
 });
 
 // Toggle handlers
