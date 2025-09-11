@@ -2,6 +2,7 @@
 @import url(reset.css);
 @import url(header.css);
 @import url(footer.css);
+@import url(listitems.css);
 /* Fonts */
 /* h1 font */
 @import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap");
@@ -24,6 +25,23 @@ body {
   color: black;
 }
 
+body.dark-mode {
+  background-color: var(--primary-dark);
+  color: var(--text-light);
+}
+body.light-mode {
+  background-color: var(--primary-light);
+  color: var(--text-dark);
+}
+
+/* AddNewList button theme colors */
+#addNewList {
+  background-color: var(--secondary-light);
+}
+body.dark-mode #addNewList {
+  background-color: var(--secondary-dark);
+}
+
 h1,
 h2,
 h3,
@@ -44,10 +62,7 @@ h6 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--accent-light, var(--accent-light));
-  border-radius: 12px;
   padding: 2rem 3rem;
-  background: var(--primary-light);
   min-height: 250px;
   max-width: 700px;
   width: 95%;
@@ -59,6 +74,55 @@ h6 {
   /* margin-bottom: Giver afstand til bunden, så containeren ikke overlapper footer.
    clamp sikrer responsiv afstand på tværs af skærmstørrelser */
   margin-bottom: clamp(4rem, 10vh, 8rem);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 /* #endregion */
+/* Ikon styling til index.html (og genbruges på listitems) */
+.li-icon {
+  width: 1.3em;
+  height: 1.3em;
+  margin-left: 0.2em;
+  margin-right: 0.2em;
+  cursor: pointer;
+}
+/* Lækkert kort-layout til lister i #listsContainer */
+#listsContainer > div {
+  background: var(--secondary-light);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+  padding: 0.7em 1.1em;
+  margin-bottom: 1.1em;
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  transition: box-shadow 0.18s, background 0.18s;
+}
+/* Inputfelt tilføj ny liste - matcher kortlayout */
+#newListForm {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto 0 auto;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 12px;
+  gap: 0.7em;
+}
+#newListForm input[type="text"] {
+  flex: 1;
+  padding: 0.6em 0.9em;
+  border-radius: 7px;
+  border: 1px solid #bbb;
+  font-size: 1.08em;
+  background: #f8f8f8;
+  color: var(--text-light);
+  outline: none;
+  transition: border 0.18s;
+}
+#newListForm input[type="text"]:focus {
+  border: 1.5px solid var(--primary-light);
+  background: #fff;
+}
+
+body.dark-mode #listsContainer > div {
+  background: var(--secondary-dark);
+}

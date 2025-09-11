@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listeopgaver</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+  </head>
+  <body>
+    <link rel="stylesheet" href="assets/css/listitems.css" />
+    <header class="li-header">
+      <button id="backBtn">&#8592;</button>
+      <span id="listTitle" style="font-style: italic"></span>
+    </header>
+    <main id="liMain" class="li-main">
+      <ul id="itemsUl" class="li-list"></ul>
+    </main>
+    <footer class="li-footer">
+      <div id="addItemBar" class="li-add-bar">
+        <input type="text" id="addItemInput" placeholder="Tilføj opgave til ..." required />
+        <button id="addItemBtn" title="Tilføj">+</button>
+      </div>
+      <div id="statusBar" class="li-status-bar">
+        <span id="totalCount">0 Total</span>
+        <span id="doneCount">0 Fuldført</span>
+        <span id="leftCount">0 Tilbage</span>
+      </div>
+    </footer>
+    <script type="module" src="assets/js/UILayer/listitems.js"></script>
+  </body>
+</html>

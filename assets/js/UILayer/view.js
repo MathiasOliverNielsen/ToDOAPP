@@ -29,6 +29,23 @@ if (addListBtn) {
 
     input.focus();
 
+    // Gem og opret listen hvis man klikker udenfor input (og ikke på addNewList)
+    setTimeout(() => {
+      function handleClickOutside(e) {
+        if (!form.contains(e.target) && e.target !== addListBtn) {
+          const listName = input.value.trim();
+          if (listName) {
+            handleListAction('add', listName);
+          }
+          form.remove();
+          document.removeEventListener('mousedown', handleClickOutside);
+          document.removeEventListener('touchstart', handleClickOutside);
+        }
+      }
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('touchstart', handleClickOutside);
+    }, 0);
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const listName = input.value.trim();
@@ -38,16 +55,10 @@ if (addListBtn) {
       }
     });
 
-    // Fjern form hvis man klikker udenfor eller trykker Escape
+    // Escape lukker form
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         form.remove();
-      }
-    });
-    document.addEventListener('mousedown', function handler(e) {
-      if (!form.contains(e.target) && e.target !== addListBtn) {
-        form.remove();
-        document.removeEventListener('mousedown', handler);
       }
     });
   });
@@ -106,28 +117,58 @@ export function renderLists(lists) {
 
       listElem.appendChild(form);
     } else {
-      listElem.textContent = list.name;
+      // Klik på listenavn åbner ny side med items, men vises som label
+      const nameLabel = document.createElement('span');
+      nameLabel.textContent = list.name;
+      nameLabel.style.flex = '1';
+      nameLabel.style.textAlign = 'left';
+      nameLabel.style.background = 'none';
+      nameLabel.style.border = 'none';
+      nameLabel.style.font = 'inherit';
+      nameLabel.style.cursor = 'pointer';
+      nameLabel.style.textDecoration = 'none';
+      nameLabel.style.padding = '0.2em 0';
+      nameLabel.style.userSelect = 'none';
+      nameLabel.style.display = 'inline-block';
+      nameLabel.style.color = 'inherit';
+      nameLabel.addEventListener('mouseenter', () => {
+        nameLabel.style.background = '#f0f0f0';
+      });
+      nameLabel.addEventListener('mouseleave', () => {
+        nameLabel.style.background = 'none';
+      });
+      nameLabel.addEventListener('click', () => {
+        window.location.href = `listitems.html?list=${encodeURIComponent(list.name)}`;
+      });
+      listElem.appendChild(nameLabel);
     }
 
-    // Rediger-knap
-    const editBtn = document.createElement('button');
-    editBtn.textContent = 'Rediger';
-    editBtn.addEventListener('click', () => {
-      // Sæt kun denne liste i redigeringsmode
+    // Rediger-ikon
+    const editImg = document.createElement('img');
+    editImg.src = 'assets/img/edit.svg';
+    editImg.alt = 'Rediger';
+    editImg.className = 'li-icon';
+    editImg.style.cursor = 'pointer';
+    editImg.title = 'Rediger';
+    editImg.addEventListener('click', () => {
       lists.forEach((l, i) => (l.beingEdited = i === index));
       renderLists(lists);
     });
-    listElem.appendChild(editBtn);
+    listElem.appendChild(editImg);
 
-    // Slet-knap
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Slet';
-    deleteBtn.addEventListener('click', () => {
+    // Slet-ikon
+    const deleteImg = document.createElement('img');
+    deleteImg.src = 'assets/img/trash.svg';
+    deleteImg.alt = 'Slet';
+    deleteImg.className = 'li-icon';
+    deleteImg.style.cursor = 'pointer';
+    deleteImg.title = 'Slet';
+    deleteImg.addEventListener('click', () => {
       if (confirm('Er du sikker på, at du vil slette listen?')) {
         handleListAction('delete', list.name);
       }
     });
-    listElem.appendChild(deleteBtn);
+    listElem.appendChild(deleteImg);
 
     container.appendChild(listElem);
   });
