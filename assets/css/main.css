@@ -126,3 +126,70 @@ h6 {
 body.dark-mode #listsContainer > div {
   background: var(--secondary-dark);
 }
+
+/* -------------------------------------------------- */
+/* Responsive adjustments (index page)                */
+/* -------------------------------------------------- */
+/* Phones portrait */
+@media (max-width: 480px) {
+  #appInfo {
+    padding: 1.4rem 1.2rem; /* tighter padding */
+    margin-top: clamp(7rem, 16vh, 10rem);
+    margin-bottom: clamp(3rem, 12vh, 6rem);
+  }
+  #newListForm {
+    max-width: 100%;
+    width: 100%;
+    gap: 0.55em;
+    padding: 0.45em 0.55em;
+    box-sizing: border-box;
+  }
+  #newListForm input[type="text"] {
+    font-size: 0.98em;
+    padding: 0.55em 0.75em;
+  }
+  #listsContainer > div {
+    padding: 0.65em 0.85em;
+    margin-bottom: 0.85em;
+    font-size: 0.95em;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 0.6rem;
+  }
+}
+
+/* Small landscape / larger phones */
+@media (max-width: 640px) and (min-width: 481px) {
+  #appInfo {
+    max-width: 560px;
+  }
+  #newListForm {
+    max-width: 500px;
+  }
+}
+
+/* Short heights (landscape phones) */
+@media (max-height: 700px) {
+  #appInfo {
+    margin-top: clamp(5rem, 12vh, 8rem);
+  }
+}
+
+/* Very short heights */
+@media (max-height: 580px) {
+  #appInfo {
+    margin-top: 3.5rem;
+    margin-bottom: 3rem;
+  }
+  #newListForm input[type="text"] {
+    font-size: 0.9em;
+  }
+  #listsContainer > div {
+    font-size: 0.9em;
+  }
+}
