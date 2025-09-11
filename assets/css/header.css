@@ -8,34 +8,90 @@ body.dark-mode {
   color: #fff;
 }
 
-/* Optional: style the toggle icon */
+/* Theme toggle icon */
 .theme-toggle {
   cursor: pointer;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  transition: transform 0.2s, filter 0.25s;
 }
+.theme-toggle:active {
+  transform: scale(0.9);
+}
+.theme-toggle:hover {
+  filter: brightness(1.1);
+}
+/* Header default (desktop / tablet) */
 #mainHeader {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
+  gap: 1.5rem;
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   width: max-content;
   margin-top: 2rem;
+  z-index: 40;
 }
 #mainHeader h1 {
   font-family: "Black Ops One", cursive, Arial, Helvetica, sans-serif;
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
   font-weight: bold;
   text-align: center;
   margin: 0;
-  padding: 1rem 0;
+  padding: 0.75rem 0;
+  line-height: 1.1;
 }
 
-#mainHeader img {
-  width: 100px;
-  height: auto;
+/* Remove overly large generic image sizing; scope to toggles */
+#mainHeader img.theme-toggle {
+  width: 40px;
+  height: 40px;
+}
+
+/* Mobile header adjustments */
+@media (max-width: 480px) {
+  #mainHeader {
+    position: fixed;
+    left: 0;
+    transform: none;
+    width: 100%;
+    margin-top: 0;
+    padding: 0.55rem 0.95rem 0.45rem 0.95rem;
+    justify-content: space-between;
+    gap: 0.75rem;
+    background: rgba(0, 0, 0, 0.14);
+    backdrop-filter: blur(10px) saturate(160%);
+  }
+  body.light-mode #mainHeader {
+    background: rgba(255, 255, 255, 0.55);
+  }
+  body.dark-mode #mainHeader {
+    background: rgba(20, 20, 20, 0.55);
+  }
+  #mainHeader h1 {
+    font-size: clamp(1.35rem, 6vw, 1.9rem);
+    padding: 0.35rem 0;
+  }
+  #mainHeader img.theme-toggle {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Short height landscape (phones rotated) */
+@media (max-height: 580px) {
+  #mainHeader {
+    padding-top: 0.35rem;
+  }
+  #mainHeader h1 {
+    font-size: clamp(1.1rem, 5vw, 1.55rem);
+  }
+  #mainHeader img.theme-toggle {
+    width: 30px;
+    height: 30px;
+  }
 }

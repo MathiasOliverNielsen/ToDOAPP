@@ -132,10 +132,34 @@ body.dark-mode #listsContainer > div {
 /* -------------------------------------------------- */
 /* Phones portrait */
 @media (max-width: 480px) {
+  :root {
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --header-mobile-h: 56px;
+    --footer-mobile-h: 72px;
+  }
+  html,
+  body {
+    height: 100dvh;
+    overflow: hidden;
+  }
+  body {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  #listsContainer {
+    padding: 0 0.9rem;
+    box-sizing: border-box;
+  }
   #appInfo {
-    padding: 1.4rem 1.2rem; /* tighter padding */
-    margin-top: clamp(7rem, 16vh, 10rem);
-    margin-bottom: clamp(3rem, 12vh, 6rem);
+    padding: 1rem 1rem;
+    margin: 0 auto;
+    min-height: calc(100dvh - (var(--header-mobile-h) + var(--footer-mobile-h)) - var(--safe-top) - var(--safe-bottom));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   #newListForm {
     max-width: 100%;
@@ -160,6 +184,11 @@ body.dark-mode #listsContainer > div {
   h5,
   h6 {
     margin-bottom: 0.6rem;
+  }
+
+  /* (Center utility reverted) */
+  #listsContainer > div {
+    width: 100%;
   }
 }
 
@@ -191,5 +220,16 @@ body.dark-mode #listsContainer > div {
   }
   #listsContainer > div {
     font-size: 0.9em;
+  }
+}
+
+/* Lock scrolling entirely on small phones (WARNING: content beyond viewport becomes unreachable) */
+@media (max-width: 480px) {
+  html,
+  body {
+    overflow: hidden !important;
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
   }
 }

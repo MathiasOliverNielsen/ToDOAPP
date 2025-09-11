@@ -1,3 +1,4 @@
+/* Desktop / default */
 #mainFooter {
   position: fixed;
   bottom: 0;
@@ -12,19 +13,66 @@
   z-index: 100;
 }
 
+/* Add button */
 #mainFooter button {
   padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 10px;
   background: var(--secondary-light);
   color: var(--text-light);
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   cursor: pointer;
-  transition: box-shadow 0.2s, background 0.2s;
+  transition: box-shadow 0.2s, background 0.2s, transform 0.18s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px;
+}
+body.dark-mode #mainFooter button {
+  color: var(--text-dark);
+}
+#mainFooter button:active {
+  transform: scale(0.92);
 }
 
 #mainFooter button:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
-  background: #f5f5f5;
+  background: var(--accent-light);
+}
+
+/* Phones portrait */
+@media (max-width: 480px) {
+  #mainFooter {
+    width: 100%;
+    left: 0;
+    transform: none;
+    margin-bottom: 0;
+    padding: 0.55rem 0.9rem 0.75rem 0.9rem;
+    grid-template-columns: 1fr auto;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0));
+    backdrop-filter: blur(6px) saturate(160%);
+  }
+  body.light-mode #mainFooter {
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0));
+  }
+  body.dark-mode #mainFooter {
+    background: linear-gradient(to top, rgba(20, 20, 20, 0.65), rgba(20, 20, 20, 0));
+  }
+  #mainFooter button {
+    font-size: 1.45rem;
+    padding: 0.65rem 1.25rem;
+    min-width: 58px;
+  }
+}
+
+/* Landscape small / short height */
+@media (max-height: 580px) {
+  #mainFooter {
+    padding: 0.4rem 0.85rem 0.55rem 0.85rem;
+  }
+  #mainFooter button {
+    font-size: 1.35rem;
+    padding: 0.55rem 1rem;
+  }
 }
