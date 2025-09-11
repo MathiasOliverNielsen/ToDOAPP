@@ -280,6 +280,10 @@ body.dark-mode .row-delete-btn {
   #listsContainer > div {
     font-size: 0.9em;
   }
+  #addNewList {
+    margin-bottom: 2rem;
+    font-size: 0.9em;
+  }
 }
 
 /* (Removed redundant scroll lock block; integrated above) */
