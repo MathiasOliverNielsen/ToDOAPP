@@ -222,6 +222,14 @@ body.dark-mode .li-status-bar {
   color: var(--text-dark);
 }
 
+/* Item row specific (shares base from main.css .editable-row) */
+.li-item-row {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+body.dark-mode .li-item-row {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
 /* -------------------------------------------------- */
 /* Responsive adjustments for phones / small screens  */
 /* -------------------------------------------------- */

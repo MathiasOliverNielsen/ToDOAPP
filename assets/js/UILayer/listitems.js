@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setTheme(theme);
 });
 import * as model from '../ModelLayer/model.js';
+import { createEditableRow } from './editableRow.js';
 
 const params = new URLSearchParams(window.location.search);
 const listName = params.get('list');
@@ -42,18 +43,43 @@ function renderItems() {
   listTitle.textContent = list.name;
   addItemInput.placeholder = `Tilføj opgave til ${list.name}...`;
   let done = 0;
-  itemsUl.innerHTML = list.items
-    .map((item) => {
-      if (item.done) done++;
-      return `<li>
-      <span class="li-checkmark">${item.done ? '✔️' : ''}</span>
-      <span style="flex:1;${item.done ? 'text-decoration:line-through;' : ''}">${item.text}</span>
-  <button class="li-edit-btn" data-id="${item.id}" title="Rediger"><img src="assets/img/edit.svg" alt="Rediger" class="li-icon" /></button>
-  <button class="li-delete-btn" data-id="${item.id}" title="Slet"><img src="assets/img/trash.svg" alt="Slet" class="li-icon" /></button>
-      <input type="checkbox" ${item.done ? 'checked' : ''} data-id="${item.id}" class="done-toggle" style="display:none;" />
-    </li>`;
-    })
-    .join('');
+  itemsUl.innerHTML = '';
+  list.items.forEach((item) => {
+    if (item.done) done++;
+    const checkSpan = document.createElement('span');
+    checkSpan.className = 'li-checkmark';
+    checkSpan.textContent = item.done ? '✔️' : '';
+    const row = createEditableRow({
+      text: item.text,
+      beingEdited: !!item.beingEdited,
+      onPrimaryClick: () => {
+        /* Toggle done on label click */
+        model.toggleListItemDone(listName, item.id);
+        renderItems();
+      },
+      onStartEdit: () => {
+        list.items.forEach((i) => (i.beingEdited = i.id === item.id));
+        renderItems();
+      },
+      onSubmit: (newText) => {
+        if (newText !== item.text) {
+          model.updateListItem(listName, item.id, newText);
+        }
+        item.beingEdited = false;
+        renderItems();
+      },
+      onDelete: () => {
+        if (confirm('Slet denne opgave?')) {
+          model.deleteListItem(listName, item.id);
+          renderItems();
+        }
+      },
+      leftContent: [checkSpan],
+      classes: ['li-item-row'],
+    });
+    if (item.done) row.classList.add('done');
+    itemsUl.appendChild(row);
+  });
   totalCount.textContent = `${list.items.length} Total`;
   doneCount.textContent = `${done} Fuldført`;
   leftCount.textContent = `${list.items.length - done} Tilbage`;
@@ -71,30 +97,7 @@ addItemBtn.addEventListener('click', () => {
   }
 });
 
-// Event delegation for edit og delete på alle li'er (model-baseret)
-itemsUl.addEventListener('click', (e) => {
-  const target = e.target.closest('button');
-  if (!target) return;
-  const id = target.dataset.id;
-  if (target.classList.contains('li-delete-btn')) {
-    if (confirm('Slet denne opgave?')) {
-      model.deleteListItem(listName, id);
-      model.saveLocalData();
-      renderItems();
-    }
-  } else if (target.classList.contains('li-edit-btn')) {
-    const list = model.userData.lists.find((l) => l.name === listName);
-    if (!list) return;
-    const item = list.items.find((i) => i.id === id);
-    const oldText = item.text;
-    const newText = prompt('Rediger opgave:', oldText);
-    if (newText && newText.trim() && newText !== oldText) {
-      model.updateListItem(listName, id, newText.trim());
-      model.saveLocalData();
-      renderItems();
-    }
-  }
-});
+// Old delegation removed – each row now has its own handlers
 
 // Enter = klik på knap
 addItemInput.addEventListener('keydown', (e) => {

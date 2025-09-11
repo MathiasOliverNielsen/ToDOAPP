@@ -2,6 +2,7 @@
 // Håndterer DOM-events og UI
 
 import { appController, handleListAction } from '../ControllerLayer/controller.js';
+import { createEditableRow } from './editableRow.js';
 import * as model from '../ModelLayer/model.js';
 
 document.addEventListener('DOMContentLoaded', appController); // Kald controlleren når siden er klar
@@ -16,7 +17,6 @@ if (addListBtn) {
     const container = document.getElementById('listsContainer');
     const form = document.createElement('form');
     form.id = 'newListForm';
-    form.style.marginTop = '1rem';
 
     const input = document.createElement('input');
     input.type = 'text';
@@ -68,103 +68,32 @@ export function renderLists(lists) {
   const container = document.getElementById('listsContainer');
   container.innerHTML = '';
   lists.forEach((list, index) => {
-    const listElem = document.createElement('div');
-    listElem.style.display = 'flex';
-    listElem.style.alignItems = 'center';
-    listElem.style.gap = '0.2rem';
-
-    // Tjek om denne liste er i redigeringsmode
-    if (list.beingEdited) {
-      listElem.style.background = '#ffeeba'; // Gul baggrund for at vise redigering
-      const form = document.createElement('form');
-      form.style.display = 'inline';
-      form.style.margin = 0;
-      const input = document.createElement('input');
-      input.type = 'text';
-      input.value = list.name;
-      input.required = true;
-      input.autofocus = true;
-      form.appendChild(input);
-
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const newName = input.value.trim();
-        if (newName && newName !== list.name) {
-          handleListAction('update', index, newName);
-        }
-        list.beingEdited = false;
+    const row = createEditableRow({
+      text: list.name,
+      beingEdited: !!list.beingEdited,
+      onPrimaryClick: () => {
+        window.location.href = `listitems.html?list=${encodeURIComponent(list.name)}`;
+      },
+      onStartEdit: () => {
+        lists.forEach((l, i) => (l.beingEdited = i === index));
         renderLists(lists);
-      });
-
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
+      },
+      onSubmit: (newText) => {
+        if (newText !== list.name) {
+          handleListAction('update', index, newText);
+        } else {
           list.beingEdited = false;
           renderLists(lists);
         }
-      });
-
-      // Klik udenfor input afslutter redigering
-      setTimeout(() => {
-        function handleClickOutside(event) {
-          if (!form.contains(event.target)) {
-            list.beingEdited = false;
-            renderLists(lists);
-            document.removeEventListener('mousedown', handleClickOutside);
-          }
+      },
+      onDelete: () => {
+        if (confirm('Er du sikker på, at du vil slette listen?')) {
+          handleListAction('delete', list.name);
         }
-        document.addEventListener('mousedown', handleClickOutside);
-      }, 0);
-
-      listElem.appendChild(form);
-    } else {
-      // Klik på listenavn åbner ny side med items, men vises som label
-      const nameLabel = document.createElement('span');
-      nameLabel.textContent = list.name;
-      nameLabel.style.flex = '1';
-      nameLabel.style.textAlign = 'left';
-      nameLabel.style.background = 'none';
-      nameLabel.style.border = 'none';
-      nameLabel.style.font = 'inherit';
-      nameLabel.style.cursor = 'pointer';
-      nameLabel.style.textDecoration = 'none';
-      nameLabel.style.padding = '0.2em 0';
-      nameLabel.style.userSelect = 'none';
-      nameLabel.style.display = 'inline-block';
-      nameLabel.style.color = 'inherit';
-      nameLabel.addEventListener('click', () => {
-        window.location.href = `listitems.html?list=${encodeURIComponent(list.name)}`;
-      });
-      listElem.appendChild(nameLabel);
-    }
-
-    // Rediger-ikon
-    const editImg = document.createElement('img');
-    editImg.src = 'assets/img/edit.svg';
-    editImg.alt = 'Rediger';
-    editImg.className = 'li-icon';
-    editImg.style.cursor = 'pointer';
-    editImg.title = 'Rediger';
-    editImg.addEventListener('click', () => {
-      lists.forEach((l, i) => (l.beingEdited = i === index));
-      renderLists(lists);
+      },
+      classes: ['list-card'],
     });
-    listElem.appendChild(editImg);
-
-    // Slet-ikon
-    const deleteImg = document.createElement('img');
-    deleteImg.src = 'assets/img/trash.svg';
-    deleteImg.alt = 'Slet';
-    deleteImg.className = 'li-icon';
-    deleteImg.style.cursor = 'pointer';
-    deleteImg.title = 'Slet';
-    deleteImg.addEventListener('click', () => {
-      if (confirm('Er du sikker på, at du vil slette listen?')) {
-        handleListAction('delete', list.name);
-      }
-    });
-    listElem.appendChild(deleteImg);
-
-    container.appendChild(listElem);
+    container.appendChild(row);
   });
 }
 
