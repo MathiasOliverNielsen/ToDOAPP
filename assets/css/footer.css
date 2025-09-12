@@ -31,6 +31,7 @@
 }
 body.dark-mode #mainFooter button {
   color: var(--text-dark);
+  background: var(--secondary-dark);
 }
 #mainFooter button:active {
   transform: scale(0.92);

@@ -4,42 +4,113 @@
 @import url(footer.css);
 @import url(listitems.css);
 /* Fonts */
-/* h1 font */
-@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap");
-
+/* Theme variables */
 :root {
-  --primary-light: #4395a8;
-  --secondary-light: #e6af52;
-  --text-light: #071112;
-  --accent-light: #e7b550;
-  /* Toggle darkMode colors */
-  --primary-dark: #275c7e;
-  --secondary-dark: #ae7719;
-  --text-dark: #edf7f8;
-  --accent-dark: #846433;
-}
-/* #region Global Styles */
-body {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: var(--primary-light);
-  color: black;
+  /* Backgrounds (page) */
+  --bg-light: #3c8791; /* teal like mock (left) */
+  --bg-dark: #2d556f; /* deeper blue like mock (right) */
+
+  /* Text */
+  --text-light: #111111; /* on light background */
+  --text-dark: #f7f9fb; /* on dark background */
+
+  /* Surfaces (cards/buttons) -> gold */
+  --secondary-light: #cf9733; /* gold */
+  --secondary-dark: #cf9733; /* keep gold in dark as in mock */
+
+  /* Inputs / fields */
+  --primary-light: #f0f4f8; /* subtle light field */
+  --primary-dark: #26303a; /* subtle dark field */
+
+  /* Accents (hover/highlight) around gold */
+  --accent-light: #e0ad51; /* lighter gold */
+  --accent-dark: #8a621a; /* darker gold */
+
+  /* Heading / brand color */
+  --primary-color: #1a1a1a; /* dark title on light */
 }
 
+/* Dark mode variable tweaks */
 body.dark-mode {
-  background-color: var(--primary-dark);
-  color: var(--text-light);
+  --primary-color: #ffffff; /* white title on dark */
 }
-body.light-mode {
-  background-color: var(--primary-light);
-  color: var(--text-dark);
-}
+/* Phones portrait */
+@media (max-width: 480px) {
+  html,
+  body {
+    height: 100dvh;
+    overflow: hidden;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
 
-/* AddNewList button theme colors */
-#addNewList {
-  background-color: var(--secondary-light);
-}
-body.dark-mode #addNewList {
-  background-color: var(--secondary-dark);
+  /* Header: visible, non-overlapping */
+  #mainHeader {
+    position: static !important;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    margin: 0;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Center the main content */
+  #appInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 8px 12px;
+    box-sizing: border-box;
+  }
+  #listsContainer {
+    width: 100%;
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
+  #listsContainer > div {
+    padding: 10px 12px;
+    margin-bottom: 10px;
+  }
+  #newListForm {
+    width: 100%;
+    padding: 6px 8px;
+    gap: 8px;
+    box-sizing: border-box;
+  }
+  #newListForm input[type="text"] {
+    font-size: 1rem;
+    padding: 8px 10px;
+  }
+
+  /* Footer: visible, centered */
+  #mainFooter {
+    position: static !important;
+    left: auto;
+    transform: none;
+    width: 100%;
+    margin: 0;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: center;
+  }
+  #mainFooter button {
+    min-height: 40px;
+    padding: 8px 16px;
+    font-size: 1.25rem;
+  }
 }
 
 h1,
@@ -134,7 +205,7 @@ body.dark-mode #listsContainer > div {
   gap: 0.2rem;
 }
 .list-card.editing {
-  background: #ffeeba !important;
+  background: var(--accent-light) !important;
 }
 .list-card-name {
   flex: 1;
@@ -170,7 +241,11 @@ body.dark-mode .editable-row {
   color: var(--text-dark);
 }
 .editable-row.editing {
-  background: #ffeeba;
+  background: var(--accent-light);
+}
+body.dark-mode .list-card.editing,
+body.dark-mode .editable-row.editing {
+  background: var(--accent-dark) !important;
 }
 .editable-row-label {
   flex: 1;

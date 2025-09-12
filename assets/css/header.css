@@ -1,11 +1,11 @@
 body.light-mode {
-  background: #fff;
-  color: #222;
+  background: var(--bg-light);
+  color: var(--text-light);
 }
 
 body.dark-mode {
-  background: #222;
-  color: #fff;
+  background: var(--bg-dark);
+  color: var(--text-dark);
 }
 
 /* Theme toggle icon */

@@ -164,18 +164,16 @@ body.dark-mode .li-add-bar input {
   background: var(--primary-dark);
   color: var(--text-dark);
 }
-/* Just set a solid background for the add item input */
+/* Revert add item input to themed colors */
 #addItemInput {
-  background: #f5f7fa; /* change to any color */
-  border: 1px solid #d0d7de;
-  color: #111;
+  background: var(--primary-light);
+  border: 1px solid #bbb;
+  color: var(--text-light);
 }
-
-/* Optional dark mode */
 .dark-mode #addItemInput {
-  background: #2b333d;
-  border: 1px solid #404954;
-  color: #e5eaf0;
+  background: var(--primary-dark);
+  border: 1px solid #555;
+  color: var(--text-dark);
 }
 .li-add-bar button {
   background: var(--secondary-light);
@@ -228,4 +226,66 @@ body.dark-mode .li-status-bar {
 }
 body.dark-mode .li-item-row {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Phones portrait: single mobile-only media query */
+@media (max-width: 480px) {
+  html,
+  body {
+    height: 100dvh;
+    overflow: hidden;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  /* Header visible and non-overlapping */
+  .li-header {
+    position: static;
+    margin: 0 auto;
+    padding: 8px 12px;
+    width: 100%;
+    max-width: 440px;
+    box-sizing: border-box;
+    justify-content: center;
+  }
+
+  /* Main content centered, fits without internal scroll */
+  .li-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+  .li-list,
+  .li-add-bar,
+  .li-status-bar {
+    width: 100%;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .li-list {
+    gap: 0.6rem;
+  }
+  .li-list li {
+    margin-bottom: 0.6rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  /* Footer visible and centered */
+  .li-footer {
+    position: static;
+    width: 100%;
+    margin: 0;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: center;
+  }
 }
