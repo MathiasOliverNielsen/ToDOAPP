@@ -143,11 +143,26 @@
 }
 
 #addItemInput {
-  @include theme-colors($primary-light, $primary-dark);
+  @include theme-colors($input-light, $accent-dark);
   border: 1px solid #bbb;
+  color: $text-dark;
+
+  // Placeholder styling
+  &::placeholder {
+    color: rgba($text-dark, 0.8);
+  }
+
+  &::-webkit-input-placeholder {
+    color: rgba($text-dark, 0.8);
+  }
+
+  &::-moz-placeholder {
+    color: rgba($text-dark, 0.6);
+    opacity: 1;
+  }
 
   body.dark-mode & {
-    border: 1px solid #404954;
+    border: 1px solid darken($accent-dark, 10%);
   }
 }
 

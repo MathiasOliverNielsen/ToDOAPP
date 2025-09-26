@@ -116,20 +116,24 @@ body.dark-mode #listsContainer > div {
   border-radius: 7px;
   border: 1px solid #bbb;
   outline: none;
-  background: #4395a8;
+  background: #f8fafc;
   color: #071112;
-  transition: border 0.18s;
+  transition: border 0.18s, background 0.18s;
+  opacity: 0.95;
   font-size: 1.08em;
 }
 body.dark-mode #newListForm input[type=text] {
-  background: #275c7e;
+  background: #1e2832;
   color: #edf7f8;
 }
 #newListForm input[type=text]:focus {
+  opacity: 1;
   border: 1.5px solid #e7b550;
+  background: white;
 }
 body.dark-mode #newListForm input[type=text]:focus {
   border: 1.5px solid #846433;
+  background: rgb(35.7375, 47.65, 59.5625);
 }
 
 /* List items page styles */
@@ -279,20 +283,24 @@ body.dark-mode .li-delete-btn {
   border-radius: 6px;
   border: 1px solid #bbb;
   outline: none;
-  background: #4395a8;
+  background: #f8fafc;
   color: #071112;
-  transition: border 0.18s;
+  transition: border 0.18s, background 0.18s;
+  opacity: 0.95;
   font-size: 1rem;
 }
 body.dark-mode .li-add-bar input {
-  background: #275c7e;
+  background: #1e2832;
   color: #edf7f8;
 }
 .li-add-bar input:focus {
+  opacity: 1;
   border: 1.5px solid #e7b550;
+  background: white;
 }
 body.dark-mode .li-add-bar input:focus {
   border: 1.5px solid #846433;
+  background: rgb(35.7375, 47.65, 59.5625);
 }
 .li-add-bar button {
   padding: 0;
@@ -321,16 +329,27 @@ body.dark-mode .li-add-bar button:hover {
 }
 
 #addItemInput {
-  background: #4395a8;
+  background: #f8fafc;
   color: #071112;
   border: 1px solid #bbb;
-}
-body.dark-mode #addItemInput {
-  background: #275c7e;
   color: #edf7f8;
 }
 body.dark-mode #addItemInput {
-  border: 1px solid #404954;
+  background: #846433;
+  color: #edf7f8;
+}
+#addItemInput::placeholder {
+  color: rgba(237, 247, 248, 0.8);
+}
+#addItemInput::-webkit-input-placeholder {
+  color: rgba(237, 247, 248, 0.8);
+}
+#addItemInput::-moz-placeholder {
+  color: rgba(237, 247, 248, 0.6);
+  opacity: 1;
+}
+body.dark-mode #addItemInput {
+  border: 1px solid rgb(95.2131147541, 72.131147541, 36.7868852459);
 }
 
 .li-status-bar {

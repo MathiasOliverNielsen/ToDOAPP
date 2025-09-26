@@ -17,6 +17,10 @@ $accent-dark: #846433;
 // Font family
 $heading-font: "Black Ops One", cursive;
 
+// Input field specific colors (more opaque)
+$input-light: #f8fafc; // Less transparent, more opaque light input
+$input-dark: #1e2832; // Less transparent, more opaque dark input
+
 // Common spacing values
 $border-radius-sm: 6px;
 $border-radius-md: 10px;

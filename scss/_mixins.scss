@@ -42,20 +42,24 @@
   }
 }
 
-// Input field styling with theme support
+// Input field styling with theme support - more opaque backgrounds
 @mixin input-style($padding: 0.6rem 0.8rem, $radius: 6px, $border: 1px solid #bbb) {
   padding: $padding;
   border-radius: $radius;
   border: $border;
   outline: none;
-  @include theme-colors($primary-light, $primary-dark);
-  transition: border 0.18s;
+  @include theme-colors($input-light, $input-dark);
+  transition: border 0.18s, background 0.18s;
+  opacity: 0.95; // Slightly less than full opacity for subtle transparency
 
   &:focus {
+    opacity: 1; // Full opacity when focused
     border: 1.5px solid $accent-light;
+    background: lighten($input-light, 2%); // Slightly lighter on focus
 
     body.dark-mode & {
       border: 1.5px solid $accent-dark;
+      background: lighten($input-dark, 3%); // Slightly lighter on focus
     }
   }
 }
