@@ -1,52 +1,6 @@
 @use "reset";
 @use "globals" as *;
+@use "mixins" as *;
 @use "header";
 @use "mainContent";
 @use "footer";
-/* Imported external css files */
-@import url(reset.css);
-@import url(header.css);
-@import url(footer.css);
-@import url(listitems.css);
-
-/* #region Global Styles */
-body {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: var(--primary-light);
-  color: black;
-}
-
-body.dark-mode {
-  background-color: var(--primary-dark);
-  color: var(--text-light);
-}
-body.light-mode {
-  background-color: var(--primary-light);
-  color: var(--text-dark);
-}
-
-/* AddNewList button theme colors */
-#addNewList {
-  background-color: var(--secondary-light);
-}
-body.dark-mode #addNewList {
-  background-color: var(--secondary-dark);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--primary-color);
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-/* #endregion */
-
-body.dark-mode #listsContainer > div {
-  background: var(--secondary-dark);
-}

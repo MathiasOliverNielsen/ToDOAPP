@@ -1,0 +1,103 @@
+@use "variables" as *;
+
+// Theme-aware background and text color mixin
+@mixin theme-colors($light-bg, $dark-bg, $light-text: $text-light, $dark-text: $text-dark) {
+  background: $light-bg;
+  color: $light-text;
+
+  body.dark-mode & {
+    background: $dark-bg;
+    color: $dark-text;
+  }
+}
+
+// Card/Container styling with theme support
+@mixin card-style($padding: 0.7em 1.1em, $radius: 12px, $shadow: 0 2px 10px rgba(0, 0, 0, 0.07)) {
+  @include theme-colors($secondary-light, $secondary-dark);
+  border-radius: $radius;
+  box-shadow: $shadow;
+  padding: $padding;
+  margin-bottom: 1.1em;
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  transition: box-shadow 0.18s, background 0.18s;
+}
+
+// Button styling with theme support and hover states
+@mixin button-style($light-bg: $secondary-light, $dark-bg: $secondary-dark, $light-hover: $accent-light, $dark-hover: $accent-dark, $padding: 0.75rem 1.5rem, $radius: 6px) {
+  padding: $padding;
+  border: none;
+  border-radius: $radius;
+  @include theme-colors($light-bg, $dark-bg);
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: $light-hover;
+
+    body.dark-mode & {
+      background: $dark-hover;
+    }
+  }
+}
+
+// Input field styling with theme support
+@mixin input-style($padding: 0.6rem 0.8rem, $radius: 6px, $border: 1px solid #bbb) {
+  padding: $padding;
+  border-radius: $radius;
+  border: $border;
+  outline: none;
+  @include theme-colors($primary-light, $primary-dark);
+  transition: border 0.18s;
+
+  &:focus {
+    border: 1.5px solid $accent-light;
+
+    body.dark-mode & {
+      border: 1.5px solid $accent-dark;
+    }
+  }
+}
+
+// Flex centering mixin
+@mixin flex-center($direction: row, $gap: 0) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @if $direction != row {
+    flex-direction: $direction;
+  }
+  @if $gap > 0 {
+    gap: $gap;
+  }
+}
+
+// Container with max-width and auto margins
+@mixin container($max-width: 340px, $margin-bottom: 1.2rem) {
+  width: 100%;
+  max-width: $max-width;
+  margin: 0 auto $margin-bottom auto;
+}
+
+// Icon button styling (edit/delete buttons)
+@mixin icon-button($color: #222) {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-left: 0.2rem;
+  color: $color;
+
+  &:hover .li-icon {
+    filter: brightness(1.2) drop-shadow(0 0 2px #0002);
+  }
+
+  body.dark-mode & {
+    color: $text-dark;
+  }
+}

@@ -5,7 +5,15 @@ body.light-mode {
   background: #4395a8;
   color: #071112;
 }
+body.dark-mode body.light-mode {
+  background: #4395a8;
+  color: #071112;
+}
 body.dark-mode {
+  background: #275c7e;
+  color: #edf7f8;
+}
+body.dark-mode body.dark-mode {
   background: #275c7e;
   color: #edf7f8;
 }
@@ -45,9 +53,9 @@ body.dark-mode {
 /* #region App Info Section */
 #appInfo {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   padding: 2rem 3rem;
   min-height: 250px;
   max-width: 700px;
@@ -75,6 +83,7 @@ body.dark-mode {
 /* List container cards */
 #listsContainer > div {
   background: #e6af52;
+  color: #071112;
   border-radius: 12px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
   padding: 0.7em 1.1em;
@@ -84,6 +93,10 @@ body.dark-mode {
   gap: 0.7em;
   transition: box-shadow 0.18s, background 0.18s;
 }
+body.dark-mode #listsContainer > div {
+  background: #ae7719;
+  color: #edf7f8;
+}
 
 /* New list form */
 #newListForm {
@@ -92,24 +105,31 @@ body.dark-mode {
   margin: 0 auto 0 auto;
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 0.7em;
   background: rgba(255, 255, 255, 0.92);
   border-radius: 12px;
-  gap: 0.7em;
 }
-#newListForm input[type="text"] {
+#newListForm input[type=text] {
   flex: 1;
   padding: 0.6em 0.9em;
   border-radius: 7px;
   border: 1px solid #bbb;
-  font-size: 1.08em;
-  background: #f8f8f8;
-  color: #071112;
   outline: none;
+  background: #4395a8;
+  color: #071112;
   transition: border 0.18s;
+  font-size: 1.08em;
 }
-#newListForm input[type="text"]:focus {
-  border: 1.5px solid #4395a8;
-  background: #fff;
+body.dark-mode #newListForm input[type=text] {
+  background: #275c7e;
+  color: #edf7f8;
+}
+#newListForm input[type=text]:focus {
+  border: 1.5px solid #e7b550;
+}
+body.dark-mode #newListForm input[type=text]:focus {
+  border: 1.5px solid #846433;
 }
 
 /* List items page styles */
@@ -143,15 +163,17 @@ body.dark-mode {
   bottom: 0;
   width: 100vw;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  flex-direction: column;
   margin-bottom: 3rem;
 }
 
 .li-main {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
   justify-content: flex-start;
   min-height: 300px;
   margin-bottom: 1.5rem;
@@ -163,29 +185,31 @@ body.dark-mode {
   max-width: 340px;
   margin: 0 auto 1.5rem auto;
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   gap: 1rem;
 }
 .li-list li {
-  display: flex;
-  align-items: center;
-  gap: 0.7em;
   background: #e6af52;
   color: #071112;
   border-radius: 12px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
   padding: 0.7em 1.1em;
   margin-bottom: 1.1em;
-  font-size: 1.08em;
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
   transition: box-shadow 0.18s, background 0.18s;
-}
-.li-list li:hover {
-  background: #e7b550;
-  color: #071112;
+  font-size: 1.08em;
 }
 body.dark-mode .li-list li {
   background: #ae7719;
   color: #edf7f8;
+}
+.li-list li:hover {
+  background: #e7b550;
+  color: #071112;
 }
 body.dark-mode .li-list li:hover {
   background: #846433;
@@ -202,7 +226,25 @@ body.dark-mode .li-list li:hover {
   margin-right: 0.2rem;
 }
 
-.li-edit-btn,
+.li-edit-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-left: 0.2rem;
+  color: #222;
+}
+.li-edit-btn:hover .li-icon {
+  filter: brightness(1.2) drop-shadow(0 0 2px rgba(0, 0, 0, 0.1333333333));
+}
+body.dark-mode .li-edit-btn {
+  color: #edf7f8;
+}
+
 .li-delete-btn {
   background: none;
   border: none;
@@ -213,81 +255,82 @@ body.dark-mode .li-list li:hover {
   justify-content: center;
   font-size: 1.2rem;
   margin-left: 0.2rem;
+  color: #b30000;
 }
-.li-edit-btn:hover .li-icon,
 .li-delete-btn:hover .li-icon {
   filter: brightness(1.2) drop-shadow(0 0 2px rgba(0, 0, 0, 0.1333333333));
 }
-
-.li-delete-btn {
-  color: #b30000;
-}
-
-.li-edit-btn {
-  color: #222;
-}
-body.dark-mode .li-edit-btn {
+body.dark-mode .li-delete-btn {
   color: #edf7f8;
 }
 
 .li-add-bar {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto 1.2rem auto;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  width: 100%;
-  max-width: 340px;
-  margin: 0 auto 1.2rem auto;
 }
 .li-add-bar input {
   flex: 1;
   padding: 0.6rem 0.8rem;
   border-radius: 6px;
   border: 1px solid #bbb;
-  font-size: 1rem;
+  outline: none;
   background: #4395a8;
   color: #071112;
+  transition: border 0.18s;
+  font-size: 1rem;
 }
 body.dark-mode .li-add-bar input {
   background: #275c7e;
   color: #edf7f8;
 }
+.li-add-bar input:focus {
+  border: 1.5px solid #e7b550;
+}
+body.dark-mode .li-add-bar input:focus {
+  border: 1.5px solid #846433;
+}
 .li-add-bar button {
-  background: #e6af52;
-  color: #071112;
+  padding: 0;
   border: none;
   border-radius: 50%;
+  background: #e6af52;
+  color: #071112;
+  cursor: pointer;
+  transition: background 0.2s;
   width: 2.5rem;
   height: 2.5rem;
   font-size: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.li-add-bar button:hover {
-  background: #e7b550;
-  color: #071112;
 }
 body.dark-mode .li-add-bar button {
   background: #ae7719;
   color: #edf7f8;
 }
+.li-add-bar button:hover {
+  background: #e7b550;
+}
 body.dark-mode .li-add-bar button:hover {
   background: #846433;
-  color: #edf7f8;
 }
 
 #addItemInput {
   background: #4395a8;
-  border: 1px solid #bbb;
   color: #071112;
+  border: 1px solid #bbb;
 }
-.dark-mode #addItemInput {
+body.dark-mode #addItemInput {
   background: #275c7e;
-  border: 1px solid #404954;
   color: #edf7f8;
+}
+body.dark-mode #addItemInput {
+  border: 1px solid #404954;
 }
 
 .li-status-bar {
@@ -308,6 +351,31 @@ body.dark-mode .li-status-bar {
   color: #edf7f8;
 }
 
+/* Mobile and tablet media query - move footer elements up for better accessibility */
+@media (max-width: 800px) {
+  .li-footer {
+    margin-bottom: 1rem;
+  }
+  .li-main {
+    margin-bottom: 0.5rem;
+    padding-bottom: 2rem;
+  }
+  .li-status-bar {
+    margin-bottom: 0.6rem;
+  }
+  .li-add-bar {
+    margin-bottom: 0.6rem;
+  }
+}
+@media (max-width: 800px) and (max-width: 350px) {
+  .li-status-bar {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.8rem;
+  }
+  .li-add-bar {
+    gap: 0.3rem;
+  }
+}
 #mainFooter {
   position: fixed;
   bottom: 0;
@@ -327,63 +395,22 @@ body.dark-mode .li-status-bar {
   border-radius: 6px;
   background: #e6af52;
   color: #071112;
+  cursor: pointer;
+  transition: background 0.2s;
   font-size: 1.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  cursor: pointer;
   transition: box-shadow 0.2s, background 0.2s;
-}
-#mainFooter button:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
-  background: #e7b550;
 }
 body.dark-mode #mainFooter button {
   background: #ae7719;
   color: #edf7f8;
 }
+#mainFooter button:hover {
+  background: #e7b550;
+}
 body.dark-mode #mainFooter button:hover {
   background: #846433;
 }
-
-/* #region Global Styles */
-body {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: var(--primary-light);
-  color: black;
-}
-
-body.dark-mode {
-  background-color: var(--primary-dark);
-  color: var(--text-light);
-}
-
-body.light-mode {
-  background-color: var(--primary-light);
-  color: var(--text-dark);
-}
-
-/* AddNewList button theme colors */
-#addNewList {
-  background-color: var(--secondary-light);
-}
-
-body.dark-mode #addNewList {
-  background-color: var(--secondary-dark);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--primary-color);
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-/* #endregion */
-body.dark-mode #listsContainer > div {
-  background: var(--secondary-dark);
-} /*# sourceMappingURL=main.css.map */
+#mainFooter button:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+}/*# sourceMappingURL=main.css.map */

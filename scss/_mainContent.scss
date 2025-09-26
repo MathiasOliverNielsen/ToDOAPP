@@ -1,11 +1,9 @@
 @use "variables" as *;
+@use "mixins" as *;
 
 /* #region App Info Section */
 #appInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  @include flex-center(column);
   padding: 2rem 3rem;
   min-height: 250px;
   max-width: 700px;
@@ -33,53 +31,27 @@
 /* List container cards */
 #listsContainer {
   > div {
-    background: $secondary-light;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
-    padding: 0.7em 1.1em;
-    margin-bottom: 1.1em;
-    display: flex;
-    align-items: center;
-    gap: 0.7em;
-    transition: box-shadow 0.18s, background 0.18s;
+    @include card-style();
   }
 }
 
 /* New list form */
 #newListForm {
-  width: 100%;
-  max-width: 420px;
-  margin: 0 auto 0 auto;
-  display: flex;
-  align-items: center;
+  @include container(420px, 0);
+  @include flex-center(row, 0.7em);
   background: rgba(255, 255, 255, 0.92);
-  border-radius: 12px;
-  gap: 0.7em;
+  border-radius: $border-radius-lg;
 
   input[type="text"] {
     flex: 1;
-    padding: 0.6em 0.9em;
-    border-radius: 7px;
-    border: 1px solid #bbb;
+    @include input-style(0.6em 0.9em, 7px);
     font-size: 1.08em;
-    background: #f8f8f8;
-    color: $text-light;
-    outline: none;
-    transition: border 0.18s;
-
-    &:focus {
-      border: 1.5px solid $primary-light;
-      background: #fff;
-    }
   }
 }
 
 /* List items page styles */
 .li-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  @include flex-center(row, 0.5rem);
   padding: 1.2rem 1rem 0.5rem 1rem;
   background: transparent;
   font-style: italic;
@@ -106,16 +78,12 @@
   left: 0;
   bottom: 0;
   width: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  @include flex-center(column);
   margin-bottom: 3rem;
 }
 
 .li-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include flex-center(column);
   justify-content: flex-start;
   min-height: 300px;
   margin-bottom: 1.5rem;
@@ -123,39 +91,15 @@
 }
 
 .li-list {
-  width: 100%;
-  max-width: 340px;
-  margin: 0 auto 1.5rem auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  @include container(340px, 1.5rem);
+  @include flex-center(column, 1rem);
 
   li {
-    display: flex;
-    align-items: center;
-    gap: 0.7em;
-    background: $secondary-light;
-    color: $text-light;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
-    padding: 0.7em 1.1em;
-    margin-bottom: 1.1em;
+    @include card-style();
     font-size: 1.08em;
-    transition: box-shadow 0.18s, background 0.18s;
 
     &:hover {
-      background: $accent-light;
-      color: $text-light;
-    }
-
-    body.dark-mode & {
-      background: $secondary-dark;
-      color: $text-dark;
-
-      &:hover {
-        background: $accent-dark;
-        color: $text-dark;
-      }
+      @include theme-colors($accent-light, $accent-dark);
     }
   }
 
@@ -171,117 +115,81 @@
   margin-right: 0.2rem;
 }
 
-.li-edit-btn,
-.li-delete-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.2em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  margin-left: 0.2rem;
-
-  &:hover .li-icon {
-    filter: brightness(1.2) drop-shadow(0 0 2px #0002);
-  }
-}
-
-.li-delete-btn {
-  color: #b30000;
-}
-
 .li-edit-btn {
-  color: #222;
+  @include icon-button(#222);
+}
 
-  body.dark-mode & {
-    color: $text-dark;
-  }
+.li-delete-btn {
+  @include icon-button(#b30000);
 }
 
 .li-add-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  width: 100%;
-  max-width: 340px;
-  margin: 0 auto 1.2rem auto;
+  @include container();
+  @include flex-center(row, 0.5rem);
 
   input {
     flex: 1;
-    padding: 0.6rem 0.8rem;
-    border-radius: 6px;
-    border: 1px solid #bbb;
+    @include input-style();
     font-size: 1rem;
-    background: $primary-light;
-    color: $text-light;
-
-    body.dark-mode & {
-      background: $primary-dark;
-      color: $text-dark;
-    }
   }
 
   button {
-    background: $secondary-light;
-    color: $text-light;
-    border: none;
-    border-radius: 50%;
+    @include button-style($padding: 0, $radius: 50%);
     width: 2.5rem;
     height: 2.5rem;
     font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.2s;
-
-    &:hover {
-      background: $accent-light;
-      color: $text-light;
-    }
-
-    body.dark-mode & {
-      background: $secondary-dark;
-      color: $text-dark;
-
-      &:hover {
-        background: $accent-dark;
-        color: $text-dark;
-      }
-    }
+    @include flex-center();
   }
 }
 
 #addItemInput {
-  background: $primary-light;
+  @include theme-colors($primary-light, $primary-dark);
   border: 1px solid #bbb;
-  color: $text-light;
 
-  .dark-mode & {
-    background: $primary-dark;
+  body.dark-mode & {
     border: 1px solid #404954;
-    color: $text-dark;
   }
 }
 
 .li-status-bar {
-  width: 100%;
-  max-width: 340px;
-  margin: 0 auto 1.2rem auto;
+  @include container();
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: $accent-light;
-  color: $text-light;
-  border-radius: 10px;
+  @include theme-colors($accent-light, $accent-dark);
+  border-radius: $border-radius-md;
   padding: 0.7rem 1rem;
   font-size: 1.1rem;
+}
 
-  body.dark-mode & {
-    background: $accent-dark;
-    color: $text-dark;
+/* Mobile and tablet media query - move footer elements up for better accessibility */
+@media (max-width: 800px) {
+  .li-footer {
+    margin-bottom: 1rem; // Move footer up from bottom
+  }
+
+  .li-main {
+    margin-bottom: 0.5rem; // Reduce space between main and footer
+    padding-bottom: 2rem; // Less bottom padding
+  }
+
+  .li-status-bar {
+    margin-bottom: 0.6rem; // Tighter spacing
+  }
+
+  .li-add-bar {
+    margin-bottom: 0.6rem; // Tighter spacing
+  }
+
+  // Extra compact spacing for very small screens
+  @media (max-width: 350px) {
+    .li-status-bar {
+      font-size: 0.95rem;
+      padding: 0.5rem 0.8rem;
+    }
+
+    .li-add-bar {
+      gap: 0.3rem;
+    }
   }
 }

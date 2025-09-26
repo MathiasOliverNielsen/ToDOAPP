@@ -1,20 +1,21 @@
 import { appController } from '../ControllerLayer/controller.js';
-// Kald userStartApp når siden er klar
-document.addEventListener('DOMContentLoaded', userStartApp);
+import '../UILayer/view.js'; // Import to run the theme toggle setup
 
-// Funktion der kaldes ved opstart af Appen
+// Call userStartApp when the page is ready
+document.addEventListener('DOMContentLoaded', () => {
+  // Small delay to ensure view.js DOM listener runs first
+  setTimeout(userStartApp, 10);
+});
+
 function userStartApp() {
   const appName = 'ToDoApp';
-  // Hent data fra localStorage
   const savedData = localStorage.getItem(appName);
   let userData = {
     lists: [],
-    //standard theme
     theme: 'light',
   };
   if (savedData) {
     userData = JSON.parse(savedData);
   }
-  // Brug controller-laget til at initialisere appen
-  appController(userData);
+  appController();
 }

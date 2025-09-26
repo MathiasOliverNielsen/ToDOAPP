@@ -1,14 +1,13 @@
 @use "variables" as *;
+@use "mixins" as *;
 
 body {
   &.light-mode {
-    background: $primary-light;
-    color: $text-light;
+    @include theme-colors($primary-light, $primary-light, $text-light, $text-light);
   }
 
   &.dark-mode {
-    background: $primary-dark;
-    color: $text-dark;
+    @include theme-colors($primary-dark, $primary-dark, $text-dark, $text-dark);
   }
 }
 
@@ -20,10 +19,7 @@ body {
 }
 
 #mainHeader {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
+  @include flex-center(row, 2rem);
   position: absolute;
   top: 0;
   left: 50%;

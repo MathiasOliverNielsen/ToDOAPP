@@ -1,4 +1,5 @@
 @use "variables" as *;
+@use "mixins" as *;
 
 #mainFooter {
   position: fixed;
@@ -14,28 +15,13 @@
   z-index: 100;
 
   button {
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 6px;
-    background: $secondary-light;
-    color: $text-light;
+    @include button-style();
     font-size: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-    cursor: pointer;
+    box-shadow: $shadow-light;
     transition: box-shadow 0.2s, background 0.2s;
 
     &:hover {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
-      background: $accent-light;
-    }
-
-    body.dark-mode & {
-      background: $secondary-dark;
-      color: $text-dark;
-
-      &:hover {
-        background: $accent-dark;
-      }
+      box-shadow: $shadow-strong;
     }
   }
 }

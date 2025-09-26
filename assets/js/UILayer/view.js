@@ -1,10 +1,8 @@
 // View-lag for ToDOAPP
 // Håndterer DOM-events og UI
 
-import { appController, handleListAction } from '../ControllerLayer/controller.js';
+import { handleListAction } from '../ControllerLayer/controller.js';
 import * as model from '../ModelLayer/model.js';
-
-document.addEventListener('DOMContentLoaded', appController); // Kald controlleren når siden er klar
 
 // Tilføj event listener til "Tilføj liste"-knap
 const addListBtn = document.getElementById('addNewList');
@@ -169,32 +167,38 @@ export function renderLists(lists) {
 }
 
 // Theme toggling
-const moonIcon = document.getElementById('moonIcon');
-const sunIcon = document.getElementById('sunIcon');
-
 export function setTheme(theme) {
+  const moonIcon = document.getElementById('moonIcon');
+  const sunIcon = document.getElementById('sunIcon');
+
   if (theme === 'dark') {
     document.body.classList.add('dark-mode');
     document.body.classList.remove('light-mode');
-    moonIcon.style.display = 'none';
-    sunIcon.style.display = '';
+    if (moonIcon) moonIcon.style.display = 'none';
+    if (sunIcon) sunIcon.style.display = '';
   } else {
     document.body.classList.add('light-mode');
     document.body.classList.remove('dark-mode');
-    moonIcon.style.display = '';
-    sunIcon.style.display = 'none';
+    if (moonIcon) moonIcon.style.display = '';
+    if (sunIcon) sunIcon.style.display = 'none';
   }
   model.saveTheme(theme);
 }
 
-// On page load, set theme from localStorage
-document.addEventListener('DOMContentLoaded', () => {
+// Initialize theme on page load
+function initializeTheme() {
   const theme = model.loadTheme();
   setTheme(theme);
-  const inp = document.getElementById('addItemInput');
-  if (inp) inp.style.background = ''; // ensure CSS applies
-});
+}
 
-// Toggle handlers
-moonIcon.addEventListener('click', () => setTheme('dark'));
-sunIcon.addEventListener('click', () => setTheme('light'));
+// Initialize theme and toggle handlers when this module loads
+document.addEventListener('DOMContentLoaded', () => {
+  initializeTheme();
+
+  // Toggle handlers - get elements inside DOMContentLoaded
+  const moonIcon = document.getElementById('moonIcon');
+  const sunIcon = document.getElementById('sunIcon');
+
+  if (moonIcon) moonIcon.addEventListener('click', () => setTheme('dark'));
+  if (sunIcon) sunIcon.addEventListener('click', () => setTheme('light'));
+});
