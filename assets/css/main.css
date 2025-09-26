@@ -1,60 +1,46 @@
-/* Imported external css files */
-@import url(reset.css);
-@import url(header.css);
-@import url(footer.css);
-@import url(listitems.css);
 /* Fonts */
 /* h1 font */
 @import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap");
-
-:root {
-  --primary-light: #4395a8;
-  --secondary-light: #e6af52;
-  --text-light: #071112;
-  --accent-light: #e7b550;
-  /* Toggle darkMode colors */
-  --primary-dark: #275c7e;
-  --secondary-dark: #ae7719;
-  --text-dark: #edf7f8;
-  --accent-dark: #846433;
-}
-/* #region Global Styles */
-body {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: var(--primary-light);
-  color: black;
-}
-
-body.dark-mode {
-  background-color: var(--primary-dark);
-  color: var(--text-light);
-}
 body.light-mode {
-  background-color: var(--primary-light);
-  color: var(--text-dark);
+  background: #4395a8;
+  color: #071112;
+}
+body.dark-mode {
+  background: #275c7e;
+  color: #edf7f8;
 }
 
-/* AddNewList button theme colors */
-#addNewList {
-  background-color: var(--secondary-light);
-}
-body.dark-mode #addNewList {
-  background-color: var(--secondary-dark);
+/* Optional: style the toggle icon */
+.theme-toggle {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--primary-color);
-  margin: 0;
-  padding: 0;
+#mainHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  margin-top: 2rem;
+}
+#mainHeader h1 {
+  font-family: "Black Ops One", cursive;
+  font-size: 2.5rem;
+  font-weight: bold;
   text-align: center;
-  margin-bottom: 1rem;
+  margin: 0;
+  padding: 1rem 0;
 }
-/* #endregion */
+#mainHeader img {
+  width: 100px;
+  height: auto;
+}
 
 /* #region App Info Section */
 #appInfo {
@@ -68,25 +54,27 @@ h6 {
   width: 95%;
   margin-left: auto;
   margin-right: auto;
-  /* margin-top: Giver afstand fra toppen, så containeren ikke overlapper header.
-   clamp sikrer responsiv afstand på tværs af skærmstørrelser */
   margin-top: clamp(10rem, 18vh, 14rem);
-  /* margin-bottom: Giver afstand til bunden, så containeren ikke overlapper footer.
-   clamp sikrer responsiv afstand på tværs af skærmstørrelser */
   margin-bottom: clamp(4rem, 10vh, 8rem);
 }
+
 /* #endregion */
-/* Ikon styling til index.html (og genbruges på listitems) */
+/* Shared icon styling */
 .li-icon {
   width: 1.3em;
   height: 1.3em;
+  display: inline-block;
+  vertical-align: middle;
+  filter: none;
+  transition: filter 0.2s;
   margin-left: 0.2em;
   margin-right: 0.2em;
   cursor: pointer;
 }
-/* Lækkert kort-layout til lister i #listsContainer */
+
+/* List container cards */
 #listsContainer > div {
-  background: var(--secondary-light);
+  background: #e6af52;
   border-radius: 12px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
   padding: 0.7em 1.1em;
@@ -96,7 +84,8 @@ h6 {
   gap: 0.7em;
   transition: box-shadow 0.18s, background 0.18s;
 }
-/* Inputfelt tilføj ny liste - matcher kortlayout */
+
+/* New list form */
 #newListForm {
   width: 100%;
   max-width: 420px;
@@ -114,15 +103,287 @@ h6 {
   border: 1px solid #bbb;
   font-size: 1.08em;
   background: #f8f8f8;
-  color: var(--text-light);
+  color: #071112;
   outline: none;
   transition: border 0.18s;
 }
 #newListForm input[type="text"]:focus {
-  border: 1.5px solid var(--primary-light);
+  border: 1.5px solid #4395a8;
   background: #fff;
 }
 
+/* List items page styles */
+.li-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.2rem 1rem 0.5rem 1rem;
+  background: transparent;
+  font-style: italic;
+  font-size: 1.2rem;
+  margin-right: 9rem;
+}
+.li-header button {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+.li-header h1 {
+  font-size: 1.2rem;
+  font-style: italic;
+  margin: 0;
+  font-weight: normal;
+}
+
+.li-footer {
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.li-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 300px;
+  margin-bottom: 1.5rem;
+  padding-bottom: 7.5rem;
+}
+
+.li-list {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto 1.5rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.li-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  background: #e6af52;
+  color: #071112;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+  padding: 0.7em 1.1em;
+  margin-bottom: 1.1em;
+  font-size: 1.08em;
+  transition: box-shadow 0.18s, background 0.18s;
+}
+.li-list li:hover {
+  background: #e7b550;
+  color: #071112;
+}
+body.dark-mode .li-list li {
+  background: #ae7719;
+  color: #edf7f8;
+}
+body.dark-mode .li-list li:hover {
+  background: #846433;
+  color: #edf7f8;
+}
+.li-list .li-icon {
+  margin-left: 0.3em;
+  margin-right: 0.1em;
+}
+
+.li-checkmark {
+  font-size: 1.3rem;
+  color: #3a7d3a;
+  margin-right: 0.2rem;
+}
+
+.li-edit-btn,
+.li-delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-left: 0.2rem;
+}
+.li-edit-btn:hover .li-icon,
+.li-delete-btn:hover .li-icon {
+  filter: brightness(1.2) drop-shadow(0 0 2px rgba(0, 0, 0, 0.1333333333));
+}
+
+.li-delete-btn {
+  color: #b30000;
+}
+
+.li-edit-btn {
+  color: #222;
+}
+body.dark-mode .li-edit-btn {
+  color: #edf7f8;
+}
+
+.li-add-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto 1.2rem auto;
+}
+.li-add-bar input {
+  flex: 1;
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  font-size: 1rem;
+  background: #4395a8;
+  color: #071112;
+}
+body.dark-mode .li-add-bar input {
+  background: #275c7e;
+  color: #edf7f8;
+}
+.li-add-bar button {
+  background: #e6af52;
+  color: #071112;
+  border: none;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.li-add-bar button:hover {
+  background: #e7b550;
+  color: #071112;
+}
+body.dark-mode .li-add-bar button {
+  background: #ae7719;
+  color: #edf7f8;
+}
+body.dark-mode .li-add-bar button:hover {
+  background: #846433;
+  color: #edf7f8;
+}
+
+#addItemInput {
+  background: #4395a8;
+  border: 1px solid #bbb;
+  color: #071112;
+}
+.dark-mode #addItemInput {
+  background: #275c7e;
+  border: 1px solid #404954;
+  color: #edf7f8;
+}
+
+.li-status-bar {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto 1.2rem auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #e7b550;
+  color: #071112;
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  font-size: 1.1rem;
+}
+body.dark-mode .li-status-bar {
+  background: #846433;
+  color: #edf7f8;
+}
+
+#mainFooter {
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 1.5rem;
+  left: 50%;
+  width: 15%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 1rem 0.3rem;
+  z-index: 100;
+}
+#mainFooter button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  background: #e6af52;
+  color: #071112;
+  font-size: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+#mainFooter button:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  background: #e7b550;
+}
+body.dark-mode #mainFooter button {
+  background: #ae7719;
+  color: #edf7f8;
+}
+body.dark-mode #mainFooter button:hover {
+  background: #846433;
+}
+
+/* #region Global Styles */
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: var(--primary-light);
+  color: black;
+}
+
+body.dark-mode {
+  background-color: var(--primary-dark);
+  color: var(--text-light);
+}
+
+body.light-mode {
+  background-color: var(--primary-light);
+  color: var(--text-dark);
+}
+
+/* AddNewList button theme colors */
+#addNewList {
+  background-color: var(--secondary-light);
+}
+
+body.dark-mode #addNewList {
+  background-color: var(--secondary-dark);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--primary-color);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* #endregion */
 body.dark-mode #listsContainer > div {
   background: var(--secondary-dark);
-}
+} /*# sourceMappingURL=main.css.map */

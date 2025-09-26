@@ -1,0 +1,287 @@
+@use "variables" as *;
+
+/* #region App Info Section */
+#appInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 3rem;
+  min-height: 250px;
+  max-width: 700px;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: clamp(10rem, 18vh, 14rem);
+  margin-bottom: clamp(4rem, 10vh, 8rem);
+}
+/* #endregion */
+
+/* Shared icon styling */
+.li-icon {
+  width: 1.3em;
+  height: 1.3em;
+  display: inline-block;
+  vertical-align: middle;
+  filter: none;
+  transition: filter 0.2s;
+  margin-left: 0.2em;
+  margin-right: 0.2em;
+  cursor: pointer;
+}
+
+/* List container cards */
+#listsContainer {
+  > div {
+    background: $secondary-light;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+    padding: 0.7em 1.1em;
+    margin-bottom: 1.1em;
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    transition: box-shadow 0.18s, background 0.18s;
+  }
+}
+
+/* New list form */
+#newListForm {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto 0 auto;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 12px;
+  gap: 0.7em;
+
+  input[type="text"] {
+    flex: 1;
+    padding: 0.6em 0.9em;
+    border-radius: 7px;
+    border: 1px solid #bbb;
+    font-size: 1.08em;
+    background: #f8f8f8;
+    color: $text-light;
+    outline: none;
+    transition: border 0.18s;
+
+    &:focus {
+      border: 1.5px solid $primary-light;
+      background: #fff;
+    }
+  }
+}
+
+/* List items page styles */
+.li-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.2rem 1rem 0.5rem 1rem;
+  background: transparent;
+  font-style: italic;
+  font-size: 1.2rem;
+  margin-right: 9rem;
+
+  button {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin: 0;
+    font-weight: normal;
+  }
+}
+
+.li-footer {
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.li-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 300px;
+  margin-bottom: 1.5rem;
+  padding-bottom: 7.5rem;
+}
+
+.li-list {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto 1.5rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    background: $secondary-light;
+    color: $text-light;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+    padding: 0.7em 1.1em;
+    margin-bottom: 1.1em;
+    font-size: 1.08em;
+    transition: box-shadow 0.18s, background 0.18s;
+
+    &:hover {
+      background: $accent-light;
+      color: $text-light;
+    }
+
+    body.dark-mode & {
+      background: $secondary-dark;
+      color: $text-dark;
+
+      &:hover {
+        background: $accent-dark;
+        color: $text-dark;
+      }
+    }
+  }
+
+  .li-icon {
+    margin-left: 0.3em;
+    margin-right: 0.1em;
+  }
+}
+
+.li-checkmark {
+  font-size: 1.3rem;
+  color: #3a7d3a;
+  margin-right: 0.2rem;
+}
+
+.li-edit-btn,
+.li-delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-left: 0.2rem;
+
+  &:hover .li-icon {
+    filter: brightness(1.2) drop-shadow(0 0 2px #0002);
+  }
+}
+
+.li-delete-btn {
+  color: #b30000;
+}
+
+.li-edit-btn {
+  color: #222;
+
+  body.dark-mode & {
+    color: $text-dark;
+  }
+}
+
+.li-add-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto 1.2rem auto;
+
+  input {
+    flex: 1;
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+    font-size: 1rem;
+    background: $primary-light;
+    color: $text-light;
+
+    body.dark-mode & {
+      background: $primary-dark;
+      color: $text-dark;
+    }
+  }
+
+  button {
+    background: $secondary-light;
+    color: $text-light;
+    border: none;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background: $accent-light;
+      color: $text-light;
+    }
+
+    body.dark-mode & {
+      background: $secondary-dark;
+      color: $text-dark;
+
+      &:hover {
+        background: $accent-dark;
+        color: $text-dark;
+      }
+    }
+  }
+}
+
+#addItemInput {
+  background: $primary-light;
+  border: 1px solid #bbb;
+  color: $text-light;
+
+  .dark-mode & {
+    background: $primary-dark;
+    border: 1px solid #404954;
+    color: $text-dark;
+  }
+}
+
+.li-status-bar {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto 1.2rem auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $accent-light;
+  color: $text-light;
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  font-size: 1.1rem;
+
+  body.dark-mode & {
+    background: $accent-dark;
+    color: $text-dark;
+  }
+}

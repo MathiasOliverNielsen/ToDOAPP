@@ -1,0 +1,41 @@
+@use "variables" as *;
+
+#mainFooter {
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 1.5rem;
+  left: 50%;
+  width: 15%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 1rem 0.3rem;
+  z-index: 100;
+
+  button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    background: $secondary-light;
+    color: $text-light;
+    font-size: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    transition: box-shadow 0.2s, background 0.2s;
+
+    &:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+      background: $accent-light;
+    }
+
+    body.dark-mode & {
+      background: $secondary-dark;
+      color: $text-dark;
+
+      &:hover {
+        background: $accent-dark;
+      }
+    }
+  }
+}

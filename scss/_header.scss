@@ -1,0 +1,47 @@
+@use "variables" as *;
+
+body {
+  &.light-mode {
+    background: $primary-light;
+    color: $text-light;
+  }
+
+  &.dark-mode {
+    background: $primary-dark;
+    color: $text-dark;
+  }
+}
+
+/* Optional: style the toggle icon */
+.theme-toggle {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+}
+
+#mainHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  margin-top: 2rem;
+
+  h1 {
+    font-family: $heading-font;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    padding: 1rem 0;
+  }
+
+  img {
+    width: 100px;
+    height: auto;
+  }
+}
